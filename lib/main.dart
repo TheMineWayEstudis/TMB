@@ -24,15 +24,6 @@ class MyApp extends StatelessWidget {
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
 
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
   final String title;
 
   @override
@@ -42,12 +33,6 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
 
     return Scaffold(
       appBar: AppBar(
@@ -58,36 +43,36 @@ class _MyHomePageState extends State<MyHomePage> {
           Card(
             child: ListTile(
               leading: Icon(Icons.place),
-              title: Text("Cómo llegar"),
-              subtitle: Text("Indica qué trayecto quieres realizar"),
+              title: Text("Com arribar"),
+              subtitle: Text("Indica quin trajecte vols realitzar"),
             ),
           ),
           Card(
             child: ListTile(
               leading: Icon(Icons.gps_fixed),
-              title: Text("Dónde estoy"),
-              subtitle: Text("Te mostraremos las paradas más cercanas"),
+              title: Text("On soc"),
+              subtitle: Text("Et mostrarem les parades més properes"),
             ),
           ),
           Card(
             child: ListTile(
               leading: Icon(Icons.directions_bus),
               title: Text("iBus-iMetro"),
-              subtitle: Text("Consulta el tiempo de espera en la parada o estación"),
+              subtitle: Text("Consulta el temps d'espera a la parada o estació"),
             ),
           ),
           Card(
             child: ListTile(
               leading: Icon(Icons.local_activity),
-              title: Text("Billetes"),
-              subtitle: Text("Ya puedes comprar billetes desde la app"),
+              title: Text("Bitllets"),
+              subtitle: Text("Ja pots comprar bitllets desde la app"),
             ),
           ),
           Card(
             child: ListTile(
               leading: Icon(Icons.group),
-              title: Text("Trayectos grupales"),
-              subtitle: Text("Coordina los trayectos de varias personas"),
+              title: Text("Trajectes grupals"),
+              subtitle: Text("Coordina els trajectes de diverses persones"),
               onTap: () => GroupalVoyages(),
             ),
           ),
@@ -96,24 +81,25 @@ class _MyHomePageState extends State<MyHomePage> {
               leading: Icon(Icons.map),
               title: Text("Mapa"),
               subtitle: Text("Observa la zona"),
+              onTap: () => DisplayMap(),
             ),
           ),
           Card(
             child: ListTile(
               leading: Icon(Icons.directions_bus, color: Colors.red,),
-              title: Text("Líneas de bus"),
+              title: Text("Línies de bus"),
             ),
           ),
           Card(
             child: ListTile(
               leading: Icon(Icons.directions_railway, color: Colors.red,),
-              title: Text("Líneas de metro"),
+              title: Text("Línies de metro"),
             ),
           ),
           Card(
             child: ListTile(
               leading: Icon(Icons.warning, color: Colors.red,),
-              title: Text("Avisos de servicio"),
+              title: Text("Avisos de servei"),
             ),
           ),
         ],
@@ -125,44 +111,44 @@ class _MyHomePageState extends State<MyHomePage> {
               child: Text(
                 "Email",
                 style: TextStyle(
-                  fontSize: 20
+                    fontSize: 20
                 ),
               ),
               decoration: BoxDecoration(
-                color: Colors.grey
+                  color: Colors.grey
               ),
             ),
             ListTile(
               leading: Icon(Icons.local_activity),
-              title: Text("Mis billetes"),
+              title: Text("Els meus bitllets"),
             ),
             ListTile(
               leading: Icon(Icons.shopping_basket),
-              title: Text("Historial de compras"),
+              title: Text("Historial de compres"),
             ),
             ListTile(
               leading: Icon(Icons.payment),
-              title: Text("Métodos de pago"),
+              title: Text("Métodes de pagament"),
             ),
             ListTile(
               leading: Icon(Icons.star),
-              title: Text("Mis favoritos"),
+              title: Text("Els meus preferits"),
             ),
             ListTile(
-              leading: Icon(Icons.place),
-              title: Text("Lugares y trayectos")
+                leading: Icon(Icons.place),
+                title: Text("Llocs i trajectes")
             ),
             ListTile(
-              leading: Icon(Icons.settings),
-              title: Text("Configuración")
+                leading: Icon(Icons.settings),
+                title: Text("Configuració")
             ),
             Divider(color: Colors.grey),
-            ListTile(title:Text("Atención al cliente")),
-            ListTile(title:Text("Redes sociales")),
+            ListTile(title:Text("Atenció al client")),
+            ListTile(title:Text("Xarxes socials")),
             ListTile(title:Text("TMBgo")),
-            ListTile(title:Text("Billetes y tarifas")),
+            ListTile(title:Text("Bitllets i tarifes")),
             Divider(color: Colors.grey),
-            ListTile(title:Text("Política de protección de datos"))
+            ListTile(title:Text("Política de protecció de dades"))
           ],
         ),
       ), // This trailing comma makes auto-formatting nicer for build methods.
@@ -173,23 +159,40 @@ class _MyHomePageState extends State<MyHomePage> {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text("Trayectos grupales"),
-            content: SingleChildScrollView(
-              child: ListBody(
-                children: <Widget>[
-                  ListTile(
-                    leading: Icon(Icons.group_add),
-                    title: Text("Crear un trayecto grupal"),
-                  ),
-                  ListTile(
-                    leading: Icon(Icons.qr_code_scanner),
-                    title: Text("Unirse mediante un código"),
-                  )
-                ],
-              ),
-            )
+              title: Text("Trajectes grupals"),
+              content: SingleChildScrollView(
+                child: ListBody(
+                  children: <Widget>[
+                    ListTile(
+                      leading: Icon(Icons.group_add),
+                      title: Text("Crear un trajecte grupal"),
+                    ),
+                    ListTile(
+                      leading: Icon(Icons.qr_code_scanner),
+                      title: Text("Uneix-te mitjançant un codi"),
+                    )
+                  ],
+                ),
+              )
           );
         }
+    );
+  }
+  Future<void> DisplayMap() async {
+    return showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text("Mapa"),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Image(image: NetworkImage("https://th.bing.com/th/id/OIP.8xHVhv-TGtTEd-5sbVYNEQHaFR?pid=ImgDet&rs=1"))
+              ],
+            )
+          ),
+        );
+      }
     );
   }
 }
