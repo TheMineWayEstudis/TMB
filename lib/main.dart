@@ -21,6 +21,45 @@ class MyApp extends StatelessWidget {
   }
 }
 
+class PaginaMapa extends StatefulWidget {
+  PaginaMapa({Key key, this.title}) : super(key:key);
+  final String title;
+
+  @override
+  _PaginaMapa createState() => _PaginaMapa();
+}
+class _PaginaMapa extends State<PaginaMapa> {
+  bool busSwitched = true, rutasSwitched = true, paradesSwitched = true, turistSwitched = false;
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Mapa interactiu"),
+      ),
+      body: ListView(
+        children: <Widget>[
+          Image(image: NetworkImage("https://www.freecountrymaps.com/map/free/spain/badalona-map-spain-52228684.png")),
+          SwitchListTile(value: busSwitched, title: Text("Mostrar autobusos"), onChanged: (value) {
+            busSwitched = value;
+            setState(() {});
+          }),
+          SwitchListTile(value: rutasSwitched, title: Text("Mostrar rutes"), onChanged: (value) {
+            rutasSwitched = value;
+            setState(() {});
+          }),
+          SwitchListTile(value: paradesSwitched, title: Text("Mostrar parades"), onChanged: (value) {
+            paradesSwitched = value;
+            setState(() {});
+          }),
+          SwitchListTile(value: turistSwitched, title: Text("Mostrar punts culturals"), onChanged: (value) {
+            turistSwitched = value;
+            setState(() {});
+          }),
+        ],
+      ),
+    );
+  }
+}
+
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
 
@@ -29,7 +68,6 @@ class MyHomePage extends StatefulWidget {
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
-
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
@@ -45,6 +83,10 @@ class _MyHomePageState extends State<MyHomePage> {
               leading: Icon(Icons.place),
               title: Text("Com arribar"),
               subtitle: Text("Indica quin trajecte vols realitzar"),
+              onTap: () {
+                Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => ComArribar()));
+              },
             ),
           ),
           Card(
@@ -81,7 +123,10 @@ class _MyHomePageState extends State<MyHomePage> {
               leading: Icon(Icons.map),
               title: Text("Mapa"),
               subtitle: Text("Observa la zona"),
-              onTap: () => DisplayMap(),
+              onTap: () {
+                Navigator.push(context,
+                MaterialPageRoute(builder: (context) => PaginaMapa()));
+              },
             ),
           ),
           Card(
@@ -170,7 +215,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     ListTile(
                       leading: Icon(Icons.qr_code_scanner),
                       title: Text("Uneix-te mitjançant un codi"),
-                    )
+                    ),
                   ],
                 ),
               )
@@ -180,19 +225,67 @@ class _MyHomePageState extends State<MyHomePage> {
   }
   Future<void> DisplayMap() async {
     return showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text("Mapa"),
-          content: SingleChildScrollView(
-            child: ListBody(
-              children: <Widget>[
-                Image(image: NetworkImage("https://th.bing.com/th/id/OIP.8xHVhv-TGtTEd-5sbVYNEQHaFR?pid=ImgDet&rs=1"))
-              ],
-            )
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text("Mapa"),
+            content: SingleChildScrollView(
+                child: ListBody(
+                  children: <Widget>[
+                    Image(image: NetworkImage("https://th.bing.com/th/id/OIP.8xHVhv-TGtTEd-5sbVYNEQHaFR?pid=ImgDet&rs=1"))
+                  ],
+                )
+            ),
+          );
+        }
+    );
+  }
+}
+
+class ComArribar extends StatefulWidget {
+  ComArribar({Key key, this.title}) : super (key:key);
+  final String title;
+
+  @override
+  _ComArribar createState() => _ComArribar();
+}
+class _ComArribar extends State<ComArribar> {
+  Widget build (BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Com arribar"),
+      ),
+      body: ListView(
+        children: <Widget>[
+          Image(image: NetworkImage("https://www.freecountrymaps.com/map/free/spain/badalona-map-spain-52228684.png")),
+          TextField(
+            decoration: InputDecoration(
+              hintText: "Origen",
+            ),
           ),
-        );
-      }
+          TextField(
+            decoration: InputDecoration(
+              hintText: "Destí",
+            ),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              showTimePicker(
+                  context: context, initialTime: TimeOfDay.now()
+              );
+            },
+            child: Text("Seleccionar hora de sortida"),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              showTimePicker(
+                  context: context, initialTime: TimeOfDay.now()
+              );
+            },
+            child: Text("Seleccionar hora d'arribada"),
+          )
+        ],
+      ),
     );
   }
 }
